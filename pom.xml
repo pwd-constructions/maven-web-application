@@ -97,14 +97,14 @@
 	
 	    <repository>
 	      <id>nexus</id>
-	      <name>Mithun Technologies Releases Nexus Repository</name>
-	      <url>http://13.214.221.119:9980/mithuntechnologies/repository/icicibank-release/</url>
+	      <name>Walmart Releases Nexus Repository</name>
+	      <url>http://3.110.174.73:9980/pwdconst/repository/walmart-release/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
-	      <name>Mithun Technologies Snapshot Nexus Repository </name>
-	      <url>http://13.214.221.119:9980/mithuntechnologies/repository/icicibank-snapshot/</url>
+	      <name>Walmart Snapshot Nexus Repository </name>
+	      <url>http://3.110.174.73:9980/pwdconst/repository/walmart-snapshot/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
