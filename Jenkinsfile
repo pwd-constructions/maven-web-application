@@ -4,6 +4,9 @@ def mavenHome = tool name: "maven3.8.5"
 
 properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5')), [$class: 'JobLocalConfiguration', changeReasonComment: ''], pipelineTriggers([pollSCM('* * * * *')])])
 
+  echo "Build number is: " ${env.BUILD_NUMBER}
+  echo "Job name is: " ${env.JOB_NAME}
+  
 stage('checkoutcode')
 {
 git branch: 'development', credentialsId: '11918f57-51f2-47ff-b1b6-07ec7d7a0201', url: 'https://github.com/pwd-constructions/maven-web-application.git'
