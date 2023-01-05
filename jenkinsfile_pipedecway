@@ -1,1 +1,64 @@
-wq
+pipeline
+{
+
+agent any 
+
+tools{
+maven="maven3.8.5"
+}
+
+triggers {
+  pollSCM '* * * * *'
+}
+
+options {
+  buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5')
+}
+
+stages{
+
+//checkOut code stage
+stage('checkoutcode')
+{
+steps{
+git branch: 'development', credentialsId: '11918f57-51f2-47ff-b1b6-07ec7d7a0201', url: 'https://github.com/pwd-constructions/maven-web-application.git'
+}
+}
+
+//Build stage
+stage('Build')
+{
+steps{
+sh "mvn clean package"
+}
+}
+
+//Execute sonarQube report
+stage('ExecuteSonarQubeReport')
+{
+steps{
+sh "mvn sonar:sonar"
+}
+}
+
+//Upload Artifates into artifate repo
+stage('UploadIntoNexus')
+{
+steps{
+sh "mvn deploy"
+}
+}
+
+//Deploy Into Tomacat server
+stage('DeployAppIntoTomcatServer')
+{
+steps{
+sshagent(['24434070-97b1-4661-b4f5-bbe6d6cd4b66']) {
+  sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@172.31.41.121:/opt/apache-tomcat-9.0.70/webapps"
+}
+}
+}
+
+}//stages closing
+
+}//pipeline closing
