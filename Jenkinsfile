@@ -56,11 +56,11 @@ stage('DeployApplicationIntoTomcat')
 sshagent(['24434070-97b1-4661-b4f5-bbe6d6cd4b66']) {
   sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@172.31.41.121:/opt/apache-tomcat-9.0.70/webapps"
 }
-} catch (e) {
+}catch (e) {
   currentBuild.result= "FAILED"
   throw e
 }
 finally{
 sendslackNotifications(currentBuild.result)
 }
-
+}
