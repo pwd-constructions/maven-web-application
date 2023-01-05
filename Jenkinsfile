@@ -65,5 +65,9 @@ sshagent(['24434070-97b1-4661-b4f5-bbe6d6cd4b66']) {
 finally{
 sendslackNotifications(currentBuild.result)
 }
+stage ('TiggeringDownStreamJob')
+  {
+    buildjob: 'pipeline_declarative-way'
+  }  
 }
 
