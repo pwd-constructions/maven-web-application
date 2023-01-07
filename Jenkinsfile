@@ -7,7 +7,7 @@ def mavenHome = tool name: "maven3.8.5"
 properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5')), [$class: 'JobLocalConfiguration', changeReasonComment: ''], pipelineTriggers([pollSCM('* * * * *')])])
 
 try{
-sendslackNotifications('STARTED')
+sendSlackNotifications('STARTED')
 
 stage('checkoutcode')
 {
@@ -38,7 +38,7 @@ sshagent(['24434070-97b1-4661-b4f5-bbe6d6cd4b66']) {
   throw e
 }
 finally{
-sendslackNotifications(currentBuild.result)
+sendSlackNotifications(currentBuild.result)
 }
 stage ('TiggeringDownStreamJob')
   {
